@@ -1,0 +1,64 @@
+entity PhoiHangHoa {
+  id Long,
+  idTaiXe String,
+  ngayTao LocalDate,
+  tenChuHangLen String,
+  bocOLen String,
+  tenHangLen String,
+  ngayLenHang LocalDate,
+  khoiLuongHangLen Integer,
+  donGiaLen Integer,
+  loaiDiHang LoaiDiHang,
+  tenChuHangVe String,
+  bocOVe String,
+  tenHangVe String,
+  ngayVeHang LocalDate,
+  khoiLuongHangVe Integer,
+  donGiaVe Integer,
+  soLitDau Integer,
+  donGiaDau Integer,
+  tienTai Integer,
+  phiDuong Integer,
+  phuPhi Integer,
+  ghiChu String,
+  tongTien Integer
+}
+
+enum LoaiDiHang {
+  THUONG,
+  TANG_BO
+}
+
+entity TaiXe {
+  id String,
+  tenTaiXe String,
+  ngayJoin LocalDate,
+  userName String,
+  password String,
+  idQuyen Long
+}
+
+entity Xe {
+  id Long,
+  idTaiXe String,
+  soXe String
+}
+
+entity Quyen {
+  id Long,
+  tenQuyen String
+}
+
+relationship ManyToOne {
+  PhoiHangHoa{idTaiXe} to TaiXe
+}
+
+relationship ManyToOne {
+  Xe{idTaiXe} to TaiXe
+}
+
+relationship OneToMany {
+  Quyen{id} to TaiXe{idQuyen}
+}
+
+paginate PhoiHangHoa, TaiXe, Xe with pagination
